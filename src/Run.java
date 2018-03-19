@@ -4,13 +4,9 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
- * Created by jinqi on 2018/3/18.
+ * Created by jinqi on 2018/3/19.
  */
-
-//-c 字符数 -w 单词数 -l 行数 -o 输出文件 -s 所有文件 -a 复杂信息 -e 停用词表
-//wc.exe -s -a –c -w *.c –e stop.txt –o output.txt
-
-public class Main {
+public class Run {
     public static String removeFilePath(String fileName){
         if(fileName.matches("^[A-z]:\\\\\\S+$"))
             fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length());
@@ -109,17 +105,24 @@ public class Main {
         String curPath = System.getProperty("user.dir");
         WordCount wc;
         HashSet<String> stopList = null;
-        for(int i = 0; i < args.length; ++i){
-            if(args[i].equals("-c"))
+
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
+        String str = sc.nextLine();
+        for(String val : str.split(" "))
+            list.add(val);
+        String [] strList = list.toArray(new String[list.size()]);
+        for(int i = 0; i < strList.length; ++i){
+            if(strList[i].equals("-c"))
                 isC = true;
-            else if(args[i].equals("-w"))
+            else if(strList[i].equals("-w"))
                 isW = true;
-            else if(args[i].equals("-l"))
+            else if(strList[i].equals("-l"))
                 isL = true;
-            else if(args[i].equals("-o")){
-                if(i < args.length - 1){
+            else if(strList[i].equals("-o")){
+                if(i < strList.length - 1){
                     isO = true;
-                    outputFileName = args[++i];
+                    outputFileName = strList[++i];
                     if(outputFileName.contains(":\\")){
                         outputFile = new File(outputFileName);
                     }
@@ -128,14 +131,14 @@ public class Main {
                     }
                 }
             }
-            else if(args[i].equals("-s"))
+            else if(strList[i].equals("-s"))
                 isS = true;
-            else if(args[i].equals("-a"))
+            else if(strList[i].equals("-a"))
                 isA = true;
-            else if(args[i].equals("-e")){
-                if(i < args.length - 1){
+            else if(strList[i].equals("-e")){
+                if(i < strList.length - 1){
                     isE = true;
-                    stopFileName = args[++i];
+                    stopFileName = strList[++i];
                     if(stopFileName.contains(":\\")){
                         stopFile = new File(stopFileName);
                     }
@@ -146,11 +149,10 @@ public class Main {
                 }
             }
             else{
-                resourceFileName = args[i];
-                System.out.println(args[0]);
+                resourceFileName = strList[i];
                 if(resourceFileName.contains(":\\")){
                     resourceFileName = removeFilePath(resourceFileName);
-                    directory = getPath(args[i]);
+                    directory = getPath(strList[i]);
                 }
                 else{
                     directory = curPath;
@@ -158,9 +160,9 @@ public class Main {
             }
         }
         try{
-            ArrayList<File> fileList = new ArrayList<>();
-//            fileList = getLegalFile(directory, resourceFileName);
-            fileList = getLegalFile("D:/idea-java/WordCount/src", "*.c");
+            ArrayList<File> fileList;
+            fileList = getLegalFile(directory, resourceFileName);
+//            fileList = getLegalFile("D:/idea-java/WordCount/src", "*.c");
             String output = "" + fileList.size();
             if(fileList.size() == 0 || (!isS && fileList.size() > 1)){
                 System.out.println("something wrong!" + directory + resourceFileName);

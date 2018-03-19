@@ -54,10 +54,10 @@ public class WordCount {
                 line++;
                 if(temp1.contains("//") || temp1.contains("/*") || temp1.contains("*/"))
                     noteLine++;
-                else if(temp1.equals(" "))
-                    emptyLine++;
-                else
+                else if(temp1.trim().length() != 0)
                     codeLine++;
+                else
+                    emptyLine++;
                 for (String val: temp1.split(" |,")){
                     wordNum += val.equals("") ? 0 : 1;
 //                    System.out.println(val.equals("") ? "[space]" : val);
@@ -82,10 +82,10 @@ public class WordCount {
                 line++;
                 if(temp1.contains("//") || temp1.contains("/*") || temp1.contains("*/"))
                     noteLine++;
-                else if(temp1.equals(" "))
-                    emptyLine++;
-                else
+                else if(temp1.trim().length() != 0)
                     codeLine++;
+                else
+                    emptyLine++;
                 for (String val: temp1.split(" |,")){
                     wordNum += val.equals("") || stopList.contains(val) ? 0 : 1;
 //                    System.out.println(val.equals("") ? "[space]" : val);
