@@ -1,12 +1,1 @@
-Main.java,字符数: 7701
-Main.java,行数: 208
-Main.java,代码行/空行/注释行: 56/9/143
-Run.java,字符数: 7776
-Run.java,行数: 219
-Run.java,代码行/空行/注释行: 160/12/47
-Test.java,字符数: 1061
-Test.java,行数: 30
-Test.java,代码行/空行/注释行: 5/1/24
-WordCount.java,字符数: 3212
-WordCount.java,行数: 110
-WordCount.java,代码行/空行/注释行: 82/16/12
+ttt.txt,代码行/空行/注释行: 4/0/1

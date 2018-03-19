@@ -150,7 +150,7 @@ public class WordCount {
 
     public static void main(String args[]){
         WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
-        System.out.println(wc.getWordNum() + " " + wc.getBuffer().length + " "  + wc.getCodeLine() + " " + wc.getEmptyLine() + " " + System.getProperty("user.dir"));
+        System.out.println( wc.getCodeLine() + " " + wc.getEmptyLine() + " " + wc.getNoteLine() + " " + System.getProperty("user.dir"));
 
     }
 
