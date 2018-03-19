@@ -6,6 +6,9 @@ import java.util.Scanner;
 /**
  * Created by jinqi on 2018/3/19.
  */
+
+//Scanner传递参数
+
 public class Run {
     public static String removeFilePath(String fileName){
         if(fileName.matches("^[A-z]:\\\\\\S+$"))
@@ -112,7 +115,7 @@ public class Run {
         for(String val : str.split(" "))
             list.add(val);
         String [] strList = list.toArray(new String[list.size()]);
-        for(int i = 0; i < strList.length; ++i){
+        for(int i = 1; i < strList.length; ++i){
             if(strList[i].equals("-c"))
                 isC = true;
             else if(strList[i].equals("-w"))
@@ -163,7 +166,8 @@ public class Run {
             ArrayList<File> fileList;
             fileList = getLegalFile(directory, resourceFileName);
 //            fileList = getLegalFile("D:/idea-java/WordCount/src", "*.c");
-            String output = "" + fileList.size();
+//            String output = "" + fileList.size();
+            String output = "";
             if(fileList.size() == 0 || (!isS && fileList.size() > 1)){
                 System.out.println("something wrong!" + directory + resourceFileName);
                 return;

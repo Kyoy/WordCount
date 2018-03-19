@@ -7,6 +7,7 @@ import java.util.Scanner;
  * Created by jinqi on 2018/3/18.
  */
 
+//args传递参数
 //-c 字符数 -w 单词数 -l 行数 -o 输出文件 -s 所有文件 -a 复杂信息 -e 停用词表
 //wc.exe -s -a –c -w *.c –e stop.txt –o output.txt
 
@@ -146,7 +147,7 @@ public class Main {
                 }
             }
             else{
-                resourceFileName = args[i];
+                resourceFileName = args[i];  //问题在于 args[i]中含有*时自动匹配//////////////////////////////////////////////////
                 System.out.println(args[0]);
                 if(resourceFileName.contains(":\\")){
                     resourceFileName = removeFilePath(resourceFileName);
@@ -160,7 +161,7 @@ public class Main {
         try{
             ArrayList<File> fileList = new ArrayList<>();
 //            fileList = getLegalFile(directory, resourceFileName);
-            fileList = getLegalFile("D:/idea-java/WordCount/src", "*.c");
+            fileList = getLegalFile("D:/idea-java/WordCount/src", "*.c");///////////////////////
             String output = "" + fileList.size();
             if(fileList.size() == 0 || (!isS && fileList.size() > 1)){
                 System.out.println("something wrong!" + directory + resourceFileName);
