@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 //统计单词个数 奇葩规则：空格和，分开的均属于一个单词
 
@@ -11,6 +13,9 @@ public class WordCount {
     private char[] buffer;
     private int wordNum;
     private int charNum;
+    private int noteLine;
+    private int emptyLine;
+    private int codeLine;
 
     public char[] getBuffer(){
         return buffer;
@@ -32,6 +37,12 @@ public class WordCount {
         return charNum;
     }
 
+    public int getNoteLine(){return noteLine;}
+
+    public int getEmptyLine(){return emptyLine;}
+
+    public int getCodeLine(){return codeLine;}
+
     public WordCount(String resourceFile) {
         BufferedReader bf;
         File file = new File(resourceFile);
@@ -42,6 +53,12 @@ public class WordCount {
             while((temp1 = bf.readLine()) != null) {
                 temp2 += temp1 + String.valueOf('\n');
                 line++;
+                if(temp1.contains("//") || temp1.contains("/*") || temp1.contains("*/"))
+                    noteLine++;
+                else if(temp1.equals(" "))
+                    emptyLine++;
+                else
+                    codeLine++;
                 for (String val: temp1.split(" |,")){
                     wordNum += val.equals("") ? 0 : 1;
 //                    System.out.println(val.equals("") ? "[space]" : val);
@@ -57,10 +74,41 @@ public class WordCount {
         }
     }
 
+    public WordCount(String resourceFile, HashSet<String> stopList) {
+        BufferedReader bf;
+        File file = new File(resourceFile);
+        this.resourceFile = resourceFile;
+        try {
+            bf = new BufferedReader(new FileReader(file));
+            String temp1, temp2 = "";
+            while((temp1 = bf.readLine()) != null) {
+                temp2 += temp1 + String.valueOf('\n');
+                line++;
+                if(temp1.contains("//") || temp1.contains("/*") || temp1.contains("*/"))
+                    noteLine++;
+                else if(temp1.equals(" "))
+                    emptyLine++;
+                else
+                    codeLine++;
+                for (String val: temp1.split(" |,")){
+                    wordNum += val.equals("") || stopList.contains(val) ? 0 : 1;
+//                    System.out.println(val.equals("") ? "[space]" : val);
+                }
+            }
+            buffer = temp2.toCharArray();
+            bf.close();
+            charNum = buffer.length;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-//    public static void main(String args[]){
-//        WordCount wc = new WordCount("D:/idea-java/WordCount/src/res/ttt.txt");
-//        System.out.print(wc.getWordNum() + " " + wc.getBuffer().length);
-//    }
+
+    public static void main(String args[]){
+        WordCount wc = new WordCount("D:/idea-java/WordCount/src/res/ttt.txt");
+        System.out.print(wc.getWordNum() + " " + wc.getBuffer().length + " " + wc.getLine());
+    }
 
 }
