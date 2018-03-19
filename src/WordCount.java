@@ -101,10 +101,10 @@ public class WordCount {
     }
 
 
-    public static void main(String args[]){
-        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
-        System.out.println(wc.getWordNum() + " " + wc.getBuffer().length + " " + wc.getLine() + " " + System.getProperty("user.dir"));
-
-    }
+//    public static void main(String args[]){
+//        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
+//        System.out.println(wc.getWordNum() + " " + wc.getBuffer().length + " " + wc.getLine() + " " + System.getProperty("user.dir"));
+//
+//    }
 
 }

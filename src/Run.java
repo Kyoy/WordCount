@@ -109,6 +109,8 @@ public class Run {
         WordCount wc;
         HashSet<String> stopList = null;
 
+//        System.out.println("testing");
+
         Scanner sc = new Scanner(System.in);
         ArrayList<String> list = new ArrayList<>();
         String str = sc.nextLine();
@@ -169,7 +171,7 @@ public class Run {
 //            String output = "" + fileList.size();
             String output = "";
             if(fileList.size() == 0 || (!isS && fileList.size() > 1)){
-                System.out.println("something wrong!" + directory + resourceFileName);
+                System.out.println("something wrong!" + directory + "\\" +resourceFileName);
                 return;
             }
             for(File val : fileList){
@@ -196,10 +198,14 @@ public class Run {
                     output = output + name + ",代码行/空行/注释行: " + wc.getCodeLine() + "/" + wc.getEmptyLine() + "/" + wc.getNoteLine() + "\r\n";
                 }
             }
-            System.out.println(output);
+//            System.out.println(output);
+            BufferedWriter out = new BufferedWriter(new FileWriter(new File(curPath + "\\result.txt")));
+            out.write(output);
+            out.flush();
+            out.close();
             if(isO){
                 outputFile.createNewFile(); // 创建新文件
-                BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
+                out = new BufferedWriter(new FileWriter(outputFile));
                 out.write(output); // \r\n即为换行
                 out.flush(); // 把缓存区内容压入文件
                 out.close(); // 最后记得关闭文件
