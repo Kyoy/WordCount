@@ -11,25 +11,56 @@ import java.util.Scanner;
 
 //-c 字符数 -w 单词数 -l 行数 -o 输出文件 -s 所有文件 -a 复杂信息 -e 停用词表
 //wc.exe -s -a –c -w *.c –e stop.txt –o output.txt
-public class Main {
-    public static ArrayList<File> getLegalFile(String Directory,String  pattern) //根据目录信息获得当前目录下所有与pattern相符的文件
-    {
-        String regex=pattern.replace("?","[0-9a-z]");
-        regex=regex.replace("*","[0-9a-z]{0,}"); //正则匹配
-        ArrayList<File> fileList=new ArrayList<>();
-        File file=new File(Directory);
-        if(file.isFile() && file.getName().matches(regex)) {   //是文件且匹配直接返回
-            fileList.add(file);
-            return fileList;
-        }
-        File[] files=file.listFiles();
-        for(File f : files) {
-            if(f.isFile()) {
 
-                if(f.getName().matches(regex)) {    //是文件并且匹配则加入到文件数组中
-                    fileList.add(f);
+public class Main {
+    public static String removeFilePath(String fileName){
+        if(fileName.matches("^[A-z]:\\\\\\S+$"))
+            fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length());
+        return fileName;
+    }
+
+    public static String getPath(String fileName){
+        String name = removeFilePath(fileName);
+        return fileName.replace("\\"+name,"");
+    }
+
+//    public static ArrayList<File> getLegalFile(String Directory,String resourceFileName)
+//    {
+//        String regex = resourceFileName.replace("*", "[0-9A-z]*");
+//        ArrayList<File> fileList=new ArrayList<>();
+//        File file = new File(Directory);
+//        if(file.isFile() && file.getName().matches(regex)) {
+//            fileList.add(file);
+//            return fileList;
+//        }
+//        else if(file.isDirectory()){
+//            File[] files=file.listFiles();
+//            for(File f : files) {
+//                if(f.getName().matches(regex)){
+//                    fileList.add(f);
+//                }
+//            }
+//        }
+//        return  fileList;
+//    }
+
+    public static ArrayList<File> getLegalFile(String directory,String resourceFileName)
+    {
+        String regex = resourceFileName.replace("*", "[0-9A-z]*");
+        ArrayList<File> fileList=new ArrayList<>();
+        File file = new File(directory);
+        try{
+            if(file.isDirectory()){
+                File[] files = file.listFiles();
+                for(File val : files){
+                    if(val.getName().matches(regex) && val.isFile()){
+                        fileList.add(val);
+                    }
                 }
             }
+        }
+        catch(NullPointerException e){
+            e.printStackTrace();
         }
         return  fileList;
     }
@@ -44,9 +75,9 @@ public class Main {
                 Str += temp;
             }
             String[] words = Str.split(" ");
-            for(String val:words)
+            for(String val:words){
                 stopList.add(val);
-
+            }
         }
         catch (Exception e)
         {
@@ -75,9 +106,9 @@ public class Main {
 
     public static void main(String args[]){
         boolean isC = false, isW = false, isL = false, isO = false, isS = false, isA = false, isE = false;
-        String resourceFileName = "", outputFileName, stopFileName;
+        String resourceFileName = "", outputFileName, stopFileName, directory = "";
         File stopFile, outputFile;
-        String curPath=System.getProperty("user.dir");
+        String curPath = System.getProperty("user.dir");
         for(int i = 0; i < args.length; ++i){
             if(args[i].equals("-c"))
                 isC = true;
@@ -89,11 +120,12 @@ public class Main {
                 if(i < args.length - 1){
                     isO = true;
                     outputFileName = args[++i];
-                    outputFile = new File(outputFileName);
-                    if(!outputFile.isFile()){
-                        outputFile = new File(curPath + "/" + outputFileName);
+                    if(outputFileName.contains(":\\")){
+                        outputFile = new File(outputFileName);
                     }
-
+                    else{
+                        outputFile = new File(curPath + "\\" + outputFileName);
+                    }
                 }
             }
             else if(args[i].equals("-s"))
@@ -104,14 +136,31 @@ public class Main {
                 if(i < args.length - 1){
                     isE = true;
                     stopFileName = args[++i];
-                    stopFile = new File(stopFileName);
-                    if(!stopFile.isFile()){
-                        stopFile = new File(curPath + "/" + stopFileName);
+                    if(stopFileName.contains(":\\")){
+                        stopFile = new File(stopFileName);
+                    }
+                    else{
+                        stopFile = new File(curPath + "\\" + stopFileName);
                     }
                 }
             }
-            else
+            else{
                 resourceFileName = args[i];
+                if(resourceFileName.contains(":\\")){
+                    resourceFileName = removeFilePath(resourceFileName);
+                    directory = getPath(args[i]);
+                }
+                else{
+                    directory = curPath;
+                }
+            }
+        }
+        try{
+            ArrayList<File> fileList = new ArrayList<>();
+            fileList = getLegalFile(directory, resourceFileName);
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
 
     }

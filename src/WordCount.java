@@ -43,9 +43,8 @@ public class WordCount {
 
     public int getCodeLine(){return codeLine;}
 
-    public WordCount(String resourceFile) {
+    public WordCount(File file) {
         BufferedReader bf;
-        File file = new File(resourceFile);
         this.resourceFile = resourceFile;
         try {
             bf = new BufferedReader(new FileReader(file));
@@ -67,16 +66,13 @@ public class WordCount {
             buffer = temp2.toCharArray();
             bf.close();
             charNum = buffer.length;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public WordCount(String resourceFile, HashSet<String> stopList) {
+    public WordCount(File file, HashSet<String> stopList) {
         BufferedReader bf;
-        File file = new File(resourceFile);
         this.resourceFile = resourceFile;
         try {
             bf = new BufferedReader(new FileReader(file));
@@ -98,17 +94,17 @@ public class WordCount {
             buffer = temp2.toCharArray();
             bf.close();
             charNum = buffer.length;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
     public static void main(String args[]){
-        WordCount wc = new WordCount("D:/idea-java/WordCount/src/res/ttt.txt");
-        System.out.print(wc.getWordNum() + " " + wc.getBuffer().length + " " + wc.getLine());
+        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
+        System.out.println(wc.getWordNum() + " " + wc.getBuffer().length + " " + wc.getLine() + " " + System.getProperty("user.dir"));
+
     }
 
 }
