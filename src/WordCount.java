@@ -8,7 +8,7 @@ import java.util.HashSet;
  * Created by jinqi on 2018/3/18.
  */
 public class WordCount {
-    private String resourceFile;
+//    private String resourceFile;
     private int line;
     private char[] buffer;
     private int wordNum;
@@ -25,9 +25,9 @@ public class WordCount {
         return line;
     }
 
-    public String getResourceFile(){
-        return resourceFile;
-    }
+//    public String getResourceFile(){
+//        return resourceFile;
+//    }
 
     public int getWordNum(){
         return wordNum;
@@ -62,14 +62,14 @@ public class WordCount {
 
     public WordCount(File file) {
         BufferedReader bf;
-        this.resourceFile = resourceFile;
+//        this.resourceFile = resourceFile;
         try {
             bf = new BufferedReader(new FileReader(file));
             String temp1, temp2 = "";
             while((temp1 = bf.readLine()) != null) {
                 temp2 += temp1 + String.valueOf('\n');
-                line++;
-                int i = kindOfLine(temp1);
+                line++;                                         // 获取行数
+                int i = kindOfLine(temp1);                      // 获取行数详细信息
                 if(i == -1)
                     emptyLine++;
                 else if(i == 1)
@@ -77,13 +77,15 @@ public class WordCount {
                 else
                     noteLine++;
                 for (String val: temp1.split(" |,")){
-                    wordNum += val.equals("") ? 0 : 1;
+                    wordNum += val.equals("") ? 0 : 1;          // 非空单词数
 //                    System.out.println(val.equals("") ? "[space]" : val);
                 }
+//                for(String val : temp1.split("[\\s,]+"))
+//                    wordNum ++;
             }
             buffer = temp2.toCharArray();
             bf.close();
-            charNum = buffer.length;
+            charNum = buffer.length - 1;                        // 字符数
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,7 +121,7 @@ public class WordCount {
 
     public WordCount(File file, HashSet<String> stopList) {
         BufferedReader bf;
-        this.resourceFile = resourceFile;
+//        this.resourceFile = resourceFile;
         try {
             bf = new BufferedReader(new FileReader(file));
             String temp1, temp2 = "";
@@ -149,8 +151,9 @@ public class WordCount {
 
 
     public static void main(String args[]){
-        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
+        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\new.txt"));
         System.out.println( wc.getCodeLine() + " " + wc.getEmptyLine() + " " + wc.getNoteLine() + " " + System.getProperty("user.dir"));
+        System.out.println(wc.getCharNum() +" " + wc.getWordNum());
 
     }
 

@@ -11,14 +11,14 @@ import java.util.Scanner;
 
 public class Run {
     public static String removeFilePath(String fileName){
-        if(fileName.matches("^[A-z]:\\\\\\S+$"))
-            fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length());
+        if(fileName.matches("^[A-z]:\\\\\\S+$"))                                          // 正则匹配绝对路径
+            fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length()); // 获取文件名
         return fileName;
     }
 
     public static String getPath(String fileName){
         String name = removeFilePath(fileName);
-        return fileName.replace("\\"+name,"");
+        return fileName.replace("\\"+name,"");                             // 获取路径
     }
 
 //    public static ArrayList<File> getLegalFile(String Directory,String resourceFileName)
@@ -41,16 +41,16 @@ public class Run {
 //        return  fileList;
 //    }
 
-    public static ArrayList<File> getLegalFile(String directory,String resourceFileName)
+    public static ArrayList<File> getLegalFile(String directory,String resourceFileName)  // directory是文件路径，resourceFileName是文件名，支持*通配符
     {
-        String regex = resourceFileName.replace("*", "[0-9A-z]*");
+        String regex = resourceFileName.replace("*", "[0-9A-z]*"); // 通配符替换
         ArrayList<File> fileList = new ArrayList<>();
         File file = new File(directory);
         try{
             if(file.isDirectory()){
-                File[] files = file.listFiles();
+                File[] files = file.listFiles();                                          // 获取directory路径下的所有文件组成File[]
                 for(File val : files){
-                    if(val.getName().matches(regex) && val.isFile()){
+                    if(val.getName().matches(regex) && val.isFile()){                     // File[]中的文件名等于或满足通配符要求，添加到ArrayList中
                         fileList.add(val);
                     }
                 }
@@ -68,10 +68,10 @@ public class Run {
             BufferedReader reader = new BufferedReader(new FileReader(stopFile));
             String temp;
             String Str = "";
-            while((temp = reader.readLine())!=null) {
+            while((temp = reader.readLine())!=null) { // 读每一行
                 Str += temp;
             }
-            String[] words = Str.split(" ");
+            String[] words = Str.split(" ");  // 按空格分割单词
             for(String val:words){
                 stopList.add(val);
             }
@@ -102,10 +102,10 @@ public class Run {
 //    }
 
     public static void main(String args[]){
-        boolean isC = false, isW = false, isL = false, isO = false, isS = false, isA = false, isE = false;
+        boolean isC = false, isW = false, isL = false, isO = false, isS = false, isA = false, isE = false;  // 是否进行相应操作，默认否
         String resourceFileName = "", outputFileName, stopFileName, directory = "";
         File stopFile = null, outputFile = null;
-        String curPath = System.getProperty("user.dir");
+        String curPath = System.getProperty("user.dir");  // 获取当前路径
         WordCount wc;
         HashSet<String> stopList = null;
 
@@ -128,11 +128,11 @@ public class Run {
                 if(i < strList.length - 1){
                     isO = true;
                     outputFileName = strList[++i];
-                    if(outputFileName.contains(":\\")){
+                    if(outputFileName.contains(":\\")){                                    // 若是绝对路径，则作为文件路径
                         outputFile = new File(outputFileName);
                     }
                     else{
-                        outputFile = new File(curPath + "\\" + outputFileName);
+                        outputFile = new File(curPath + "\\" + outputFileName); // 若是相对路径，将当前路径和相对路径拼接获得文件路径
                     }
                 }
             }
@@ -144,11 +144,11 @@ public class Run {
                 if(i < strList.length - 1){
                     isE = true;
                     stopFileName = strList[++i];
-                    if(stopFileName.contains(":\\")){
+                    if(stopFileName.contains(":\\")){                                      // 若是绝对路径，则作为文件路径
                         stopFile = new File(stopFileName);
                     }
                     else{
-                        stopFile = new File(curPath + "\\" + stopFileName);
+                        stopFile = new File(curPath + "\\" + stopFileName);     // 若是相对路径，将当前路径和相对路径拼接获得文件路径
                     }
                     stopList = stopList(stopFile);
                 }
@@ -156,8 +156,8 @@ public class Run {
             else{
                 resourceFileName = strList[i];
                 if(resourceFileName.contains(":\\")){
-                    resourceFileName = removeFilePath(resourceFileName);
-                    directory = getPath(strList[i]);
+                    resourceFileName = removeFilePath(resourceFileName);                   // 获取文件名
+                    directory = getPath(strList[i]);                                       // 获取文件路径
                 }
                 else{
                     directory = curPath;
@@ -206,9 +206,9 @@ public class Run {
             if(isO){
                 outputFile.createNewFile(); // 创建新文件
                 out = new BufferedWriter(new FileWriter(outputFile));
-                out.write(output); // \r\n即为换行
-                out.flush(); // 把缓存区内容压入文件
-                out.close(); // 最后记得关闭文件
+                out.write(output);          // \r\n即为换行
+                out.flush();                // 把缓存区内容压入文件
+                out.close();                // 关闭文件
             }
         }
         catch(Exception e){
