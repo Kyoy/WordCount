@@ -85,7 +85,7 @@ public class WordCount {
             }
             buffer = temp2.toCharArray();
             bf.close();
-            charNum = buffer.length - 1;                        // 字符数
+            charNum = buffer.length == 0 ? 0 : buffer.length - 1;                        // 字符数
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,7 +151,7 @@ public class WordCount {
 
 
     public static void main(String args[]){
-        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\new.txt"));
+        WordCount wc = new WordCount(new File("D:\\idea-java\\WordCount\\src\\res\\ttt.txt"));
         System.out.println( wc.getCodeLine() + " " + wc.getEmptyLine() + " " + wc.getNoteLine() + " " + System.getProperty("user.dir"));
         System.out.println(wc.getCharNum() +" " + wc.getWordNum());
 
