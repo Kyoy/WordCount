@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6d29a44-d3bc-4ede-82e9-babd5b8abc0e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BIN/jar/WordCount.jar" afterPath="$PROJECT_DIR$/BIN/jar/WordCount.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/WordCount_jar/WordCount.jar" afterPath="$PROJECT_DIR$/out/artifacts/WordCount_jar/WordCount.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WordCount/WordCount.class" afterPath="$PROJECT_DIR$/out/production/WordCount/WordCount.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BIN/result.txt" afterPath="$PROJECT_DIR$/BIN/result.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WordCount/res/new.txt" afterPath="$PROJECT_DIR$/out/production/WordCount/res/new.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WordCount.java" afterPath="$PROJECT_DIR$/src/WordCount.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/res/new.txt" afterPath="$PROJECT_DIR$/src/res/new.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,7 +95,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="48">
-                <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+                <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -725,7 +718,7 @@
       <workItem from="1521365113962" duration="14242000" />
       <workItem from="1521417490539" duration="37239000" />
       <workItem from="1521512607643" duration="9857000" />
-      <workItem from="1521534470130" duration="2797000" />
+      <workItem from="1521534470130" duration="2853000" />
     </task>
     <task id="LOCAL-00001" summary="args">
       <created>1521386888177</created>
@@ -769,11 +762,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521468103252</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="readme">
+      <created>1521540345075</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1521540345075</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64817000" />
+    <option name="totallyTimeSpent" value="64873000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -856,7 +856,8 @@
     <MESSAGE value="完善部分细节" />
     <MESSAGE value="判断代码行" />
     <MESSAGE value="注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="注释" />
+    <MESSAGE value="readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1187,7 +1188,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="48">
-            <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+            <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
